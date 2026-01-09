@@ -9,7 +9,7 @@ import { Label } from '../../../components/ui/label';
 import { Card } from '../../../components/ui/card';
 
 export default function RegisterPage() {
-  const navigate = useRouter();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -18,27 +18,37 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Simulasi registrasi
-    if (formData.password === formData.confirmPassword) {
-      // Simpan data user ke localStorage (simulasi)
-      localStorage.setItem('user', JSON.stringify({
-        username: formData.username,
-        passwword: formData.password
-      }));
-      localStorage.setItem('isAuthenticated', 'true');
-      
-      // Redirect ke login page
-      navigate.push('/login');
-    } else {
+
+    if (formData.password !== formData.confirmPassword) {
       alert('Password tidak cocok!');
+      return;
     }
+
+    // Cek apakah user sudah pernah register
+    const existingUser = localStorage.getItem('registeredUser');
+    if (existingUser) {
+      alert('Akun sudah terdaftar, silakan login.');
+      router.push('/login');
+      return;
+    }
+
+    // Simpan data register
+    localStorage.setItem(
+      'registeredUser',
+      JSON.stringify({
+        username: formData.username,
+        password: formData.password
+      })
+    );
+
+    alert('Registrasi berhasil! Silakan login.');
+    router.push('/login');
   };
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8 items-center">
-        {/* Left Side - Branding */}
+        {/* Left Side */}
         <div className="hidden md:block space-y-6">
           <div className="flex items-center gap-2">
             <ListTodo className="w-12 h-12 text-blue-600" />
@@ -52,7 +62,7 @@ export default function RegisterPage() {
           </p>
         </div>
 
-        {/* Right Side - Form */}
+        {/* Right Side */}
         <Card className="p-8 shadow-xl">
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Buat Akun</h2>
@@ -61,16 +71,18 @@ export default function RegisterPage() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <Label htmlFor="name">Username</Label>
+              <Label htmlFor="username">Username</Label>
               <div className="relative">
                 <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                 <Input
-                  id="name"
+                  id="username"
                   type="text"
-                  placeholder="Masukkan username"
                   className="pl-10"
+                  placeholder="Masukkan username"
                   value={formData.username}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, username: e.target.value })
+                  }
                   required
                 />
               </div>
@@ -83,10 +95,12 @@ export default function RegisterPage() {
                 <Input
                   id="password"
                   type="password"
-                  placeholder="Minimal 8 karakter"
                   className="pl-10"
+                  placeholder="Minimal 8 karakter"
                   value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
                   required
                 />
               </div>
@@ -99,10 +113,15 @@ export default function RegisterPage() {
                 <Input
                   id="confirmPassword"
                   type="password"
-                  placeholder="Ulangi password"
                   className="pl-10"
+                  placeholder="Ulangi password"
                   value={formData.confirmPassword}
-                  onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      confirmPassword: e.target.value
+                    })
+                  }
                   required
                 />
               </div>
@@ -112,16 +131,6 @@ export default function RegisterPage() {
               Daftar Sekarang
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-           
-            </div>
           </form>
 
           <p className="mt-6 text-center text-sm text-gray-600">
