@@ -3709,19 +3709,19 @@
     ]
   },
   "packageFolders": {
-    "/home/rakha/.nuget/packages/": {}
+    "C:\\Users\\Maulana Adi H\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/rakha/code/random/task-management/backend/TaskApi.csproj",
+      "projectUniqueName": "D:\\PROJECTS\\Sarastya\\task-management\\backend\\TaskApi.csproj",
       "projectName": "TaskApi",
-      "projectPath": "/home/rakha/code/random/task-management/backend/TaskApi.csproj",
-      "packagesPath": "/home/rakha/.nuget/packages/",
-      "outputPath": "/home/rakha/code/random/task-management/backend/obj/",
+      "projectPath": "D:\\PROJECTS\\Sarastya\\task-management\\backend\\TaskApi.csproj",
+      "packagesPath": "C:\\Users\\Maulana Adi H\\.nuget\\packages\\",
+      "outputPath": "D:\\PROJECTS\\Sarastya\\task-management\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/rakha/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Maulana Adi H\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -3803,12 +3803,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.22, 8.0.22]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -3817,7 +3811,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.122/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.122/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
